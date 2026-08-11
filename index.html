@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07110d">
+<meta name="description" content="长沙华中涉外职业高中官网，展示学校概况、成长路径、专业设置、校园生活、新闻动态与招生服务。">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="长沙华中涉外职业高中">
+<meta property="og:description" content="立足职业教育，重视文化基础、专业技能与综合素养培养。">
+<title>长沙华中涉外职业高中</title>
+<link rel="icon" type="image/png" href="./favicon-64.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="manifest" href="./site.webmanifest">
+<link rel="preload" href="./hero.webp" as="image" fetchpriority="high">
+<link rel="preload" href="./crest.webp" as="image">
+<style id="site-css">
+:root{
+  --paper:#f4f5f1;
+  --paper-2:#edf1ec;
+  --ink:#102019;
+  --muted:#657169;
+  --line:rgba(15,31,23,.13);
+  --night:#07110d;
+  --night-2:#0c1712;
+  --green:#188558;
+  --green-2:#6bc995;
+  --blue:#4b8ee7;
+  --page:min(1440px,calc(100vw - 96px));
+  --ease:cubic-bezier(.22,1,.36,1);
+  --hero-p:0;
+  --mouse-x:76%;
+  --mouse-y:22%;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;background:var(--night)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+button,a{-webkit-tap-highlight-color:transparent}
+::selection{background:rgba(24,133,88,.20)}
+.page{width:var(--page);margin-inline:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* global progress */
+.progress{position:fixed;z-index:1200;top:0;left:0;right:0;height:2px;pointer-events:none}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#86ddb0,#fff);transform-origin:left;transform:scaleX(0)}
+
+/* single navigation material + one active indicator */
+.header{position:fixed;z-index:1100;left:0;right:0;top:0;padding:18px 0;pointer-events:none;transition:padding .42s var(--ease)}
+.header.compact{padding:10px 0}
+.nav-shell{width:var(--page);height:66px;margin:auto;border-radius:19px;padding:0 12px 0 14px;display:flex;align-items:center;gap:18px;pointer-events:auto;position:relative;color:#fff;
+  background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.022));
+  border:1px solid rgba(255,255,255,.20);
+  box-shadow:0 16px 50px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.26);
+  backdrop-filter:blur(7px) saturate(112%);-webkit-backdrop-filter:blur(7px) saturate(112%);
+  transition:height .42s var(--ease),background .34s,border-color .34s,color .34s,box-shadow .34s}
+.header.compact .nav-shell{height:58px}
+.header.light .nav-shell{
+  color:var(--ink);
+  background:linear-gradient(135deg,rgba(255,255,255,.83),rgba(255,255,255,.68));
+  border-color:rgba(255,255,255,.94);
+  box-shadow:0 14px 40px rgba(25,47,36,.10),inset 0 1px 0 #fff}
+.nav-shell::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:
+  radial-gradient(350px 120px at 12% -20%,rgba(255,255,255,.23),transparent 68%),
+  linear-gradient(145deg,rgba(255,255,255,.10),transparent 30%,transparent 75%,rgba(255,255,255,.03))}
+.brand{display:flex;align-items:center;gap:11px;min-width:292px;position:relative;z-index:3}
+.brand img{width:45px;height:45px;object-fit:contain;filter:drop-shadow(0 5px 14px rgba(0,0,0,.12))}
+.brand-copy{display:grid;line-height:1.02}
+.brand-copy strong{font-size:16px;letter-spacing:.015em;white-space:nowrap}
+.brand-copy small{font-size:7.5px;letter-spacing:.10em;opacity:.60;margin-top:5px;white-space:nowrap}
+.desktop-nav{height:46px;display:flex;align-items:center;position:relative;margin-left:auto}
+.desktop-nav a{padding:13px 13px;font-size:13px;white-space:nowrap;opacity:.68;position:relative;z-index:2;transition:opacity .2s}
+.desktop-nav a:hover,.desktop-nav a.active{opacity:1}
+.nav-indicator{position:absolute;z-index:1;top:5px;left:0;height:36px;border-radius:13px;width:0;opacity:1;pointer-events:none;
+  background:rgba(255,255,255,.115);border:1px solid rgba(255,255,255,.17);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22);
+  transition:transform .42s var(--ease),width .42s var(--ease),background .28s,border-color .28s}
+.header.light .nav-indicator{background:rgba(15,64,42,.062);border-color:rgba(15,64,42,.08);box-shadow:none}
+.nav-action{height:42px;padding:0 16px;border-radius:14px;display:flex;align-items:center;gap:14px;background:#fff;color:#0b1711;font-size:12px;font-weight:680;position:relative;z-index:3;transition:.25s var(--ease)}
+.nav-action:hover{transform:translateY(-1px)}
+.header.light .nav-action{background:var(--ink);color:#fff}
+.menu-button{display:none;width:44px;height:44px;border:0;background:transparent;border-radius:14px;position:relative;z-index:5}
+.menu-button span{position:absolute;left:12px;width:20px;height:1.5px;background:currentColor;transition:.3s var(--ease)}
+.menu-button span:first-child{top:18px}.menu-button span:last-child{top:25px}
+.menu-button[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.menu-button[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.mobile-menu{position:fixed;z-index:1050;inset:10px;border-radius:28px;padding:104px 22px 22px;color:#fff;background:rgba(8,17,13,.86);border:1px solid rgba(255,255,255,.17);backdrop-filter:blur(16px) saturate(118%);-webkit-backdrop-filter:blur(16px) saturate(118%);opacity:0;visibility:hidden;transform:translateY(-10px) scale(.985);transition:.36s var(--ease);display:flex;flex-direction:column;justify-content:space-between}
+.mobile-menu.open{opacity:1;visibility:visible;transform:none}
+.mobile-menu nav{display:grid}
+.mobile-menu a{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.12);padding:15px 2px;font-size:24px}
+.mobile-menu a small{font-size:10px;letter-spacing:.12em;opacity:.42}
+.mobile-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mobile-actions a{font-size:13px;border:1px solid rgba(255,255,255,.15);border-radius:15px;height:48px;display:grid;place-items:center;padding:0}
+
+/* hero */
+.hero{height:112svh;min-height:780px;position:relative;background:var(--night);color:#fff;overflow:hidden}
+.hero-media{position:absolute;inset:-5% 0 -8%;will-change:transform;transform:scale(calc(1.02 + var(--hero-p)*.05)) translateY(calc(var(--hero-p)*-2.4%))}
+.hero-media img{filter:saturate(.93) contrast(1.035)}
+.hero-shade{position:absolute;inset:0;background:
+ linear-gradient(90deg,rgba(3,10,7,.88) 0%,rgba(3,10,7,.61) 32%,rgba(3,10,7,.24) 62%,rgba(3,10,7,.07) 100%),
+ linear-gradient(180deg,rgba(2,7,5,.30),transparent 36%,rgba(4,10,7,.12) 66%,rgba(4,10,7,.79))}
+.hero-glow{position:absolute;left:var(--mouse-x);top:var(--mouse-y);width:740px;height:740px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(218,239,255,.17),rgba(191,232,209,.06) 36%,transparent 67%);filter:blur(31px);pointer-events:none;transition:left .9s var(--ease),top .9s var(--ease)}
+.hero-inner{position:relative;z-index:2;width:var(--page);height:100%;margin:auto;display:grid;grid-template-columns:minmax(0,850px) 1fr;align-items:center;padding-top:72px}
+.hero-copy{transform:translateY(calc(var(--hero-p)*-54px));opacity:calc(1 - var(--hero-p)*.80);will-change:transform,opacity}
+.eyebrow{font-size:10px;letter-spacing:.22em;color:rgba(255,255,255,.65);font-weight:720;margin-bottom:25px}
+.hero h1{font-size:clamp(62px,6.1vw,92px);line-height:.90;letter-spacing:-.065em;font-weight:650;margin:0;max-width:900px}
+.hero h1 span{display:block;white-space:nowrap}
+.hero-lede{font-size:18px;line-height:1.8;color:rgba(255,255,255,.70);max-width:650px;margin:30px 0 34px}
+.hero-actions{display:flex;gap:11px;flex-wrap:wrap}
+.button{height:50px;padding:0 22px;border-radius:15px;display:inline-flex;align-items:center;gap:20px;font-size:14px;font-weight:680;border:1px solid rgba(255,255,255,.18);transition:transform .24s var(--ease),background .24s}
+.button:hover{transform:translateY(-2px)}
+.button.primary{background:#fff;color:#0d1813}
+.button.ghost{background:rgba(255,255,255,.055);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.hero-status{position:absolute;z-index:3;right:max(48px,calc((100vw - min(1440px,calc(100vw - 96px)))/2));bottom:110px;width:min(370px,30vw);padding:18px;border-radius:22px;
+ background:linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.035));
+ border:1px solid rgba(255,255,255,.24);box-shadow:0 24px 66px rgba(0,0,0,.17),inset 0 1px 0 rgba(255,255,255,.30);
+ backdrop-filter:blur(8px) saturate(118%);-webkit-backdrop-filter:blur(8px) saturate(118%);
+ transform:translateY(calc(var(--hero-p)*24px));opacity:calc(1 - var(--hero-p)*.65)}
+.hero-status::before{content:"";position:absolute;left:14%;top:0;width:48%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.88),transparent)}
+.status-top{display:flex;justify-content:space-between;gap:12px;font-size:9px;letter-spacing:.16em;color:rgba(255,255,255,.56)}
+.hero-status h3{font-size:28px;line-height:1.1;letter-spacing:-.035em;margin:32px 0 13px}
+.hero-status p{margin:0;color:rgba(255,255,255,.65);font-size:13px;line-height:1.75}
+.status-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:18px;border-top:1px solid rgba(255,255,255,.13)}
+.status-grid div{padding-top:13px}.status-grid div+div{border-left:1px solid rgba(255,255,255,.13);padding-left:16px}
+.status-grid strong{display:block;font-size:18px}.status-grid span{font-size:10px;color:rgba(255,255,255,.53)}
+.scroll-cue{position:absolute;z-index:3;bottom:33px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;font-size:9px;letter-spacing:.16em;color:rgba(255,255,255,.52)}
+.scroll-cue i{width:30px;height:1px;background:rgba(255,255,255,.36);position:relative;overflow:hidden}
+.scroll-cue i::after{content:"";position:absolute;inset:0;background:#fff;transform:translateX(-110%);animation:sweep 2.1s ease-in-out infinite}
+@keyframes sweep{55%,100%{transform:translateX(110%)}}
+
+/* shared */
+.section{position:relative;padding:126px 0}
+.section-head{width:var(--page);margin:0 auto 56px;display:grid;grid-template-columns:220px 1fr;gap:40px}
+.kicker{font-size:10px;letter-spacing:.18em;color:var(--green);font-weight:760;padding-top:9px}
+.section-title{display:grid;grid-template-columns:minmax(0,820px) minmax(220px,380px);gap:50px;align-items:end}
+.section h2{font-size:clamp(48px,4.7vw,74px);letter-spacing:-.055em;line-height:.95;font-weight:620;margin:0}
+.section-intro{margin:0;color:var(--muted);line-height:1.85;font-size:14px;max-width:390px}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* overview */
+.overview{background:var(--paper);border-radius:38px 38px 0 0;margin-top:-1px;z-index:5;box-shadow:0 -30px 72px rgba(2,8,6,.15)}
+.overview-grid{width:var(--page);margin:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(380px,.9fr);gap:64px;align-items:stretch}
+.overview-photo{min-height:610px;border-radius:30px;overflow:hidden;position:relative;background:#dfe6df}
+.overview-photo img{transition:transform 1.2s var(--ease)}
+.overview-photo:hover img{transform:scale(1.015)}
+.photo-cap{position:absolute;left:20px;right:20px;bottom:20px;border-radius:18px;padding:15px 17px;color:#fff;display:flex;justify-content:space-between;gap:20px;align-items:end;background:linear-gradient(135deg,rgba(6,15,11,.43),rgba(6,15,11,.16));border:1px solid rgba(255,255,255,.20);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.photo-cap strong{font-size:15px}.photo-cap span{font-size:9px;letter-spacing:.13em;opacity:.66}
+.overview-copy{display:flex;flex-direction:column;justify-content:space-between;padding:18px 0 2px}
+.overview-copy h3{font-size:38px;letter-spacing:-.04em;line-height:1.08;margin:0 0 20px}
+.overview-copy>p{font-size:15px;line-height:1.9;color:var(--muted);margin:0;max-width:640px}
+.metrics{margin-top:50px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr}
+.metric{padding:22px 0 20px;border-bottom:1px solid var(--line)}
+.metric:nth-child(odd){padding-right:28px}.metric:nth-child(even){padding-left:28px;border-left:1px solid var(--line)}
+.metric strong{display:block;font-size:37px;letter-spacing:-.045em;font-weight:610}
+.metric span{font-size:12px;color:var(--muted);display:block;margin-top:5px}
+.overview-note{margin-top:28px;font-size:11px;line-height:1.7;color:#7c8780}
+.honors-strip{width:var(--page);margin:80px auto 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:1.15fr 1fr 1fr}
+.honor{padding:26px 26px 26px 0}
+.honor+.honor{border-left:1px solid var(--line);padding-left:28px}
+.honor small{display:block;font-size:9px;letter-spacing:.14em;color:var(--green);font-weight:760;margin-bottom:10px}
+.honor strong{font-size:18px;line-height:1.45;font-weight:620}
+.honor p{font-size:12px;line-height:1.7;color:var(--muted);margin:8px 0 0}
+
+/* growth */
+.growth{background:#e9eee9}
+.growth-layout{width:var(--page);margin:auto;display:grid;grid-template-columns:minmax(330px,.72fr) minmax(0,1.28fr);gap:34px;align-items:stretch}
+.growth-list{display:flex;flex-direction:column;border-top:1px solid rgba(15,31,23,.16)}
+.growth-tab{border:0;background:none;text-align:left;padding:24px 4px;border-bottom:1px solid rgba(15,31,23,.16);cursor:pointer;display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:start;transition:padding .3s var(--ease)}
+.growth-tab:hover{padding-left:10px}
+.growth-tab .num{font-size:10px;letter-spacing:.12em;color:#7d8982;margin-top:6px}
+.growth-tab strong{font-size:24px;letter-spacing:-.025em;font-weight:620}
+.growth-tab p{grid-column:2/4;margin:8px 0 0;font-size:12px;line-height:1.7;color:var(--muted);max-width:440px;display:none}
+.growth-tab.active p{display:block}
+.growth-tab .arrow{font-size:18px;transition:transform .3s var(--ease);margin-top:3px}
+.growth-tab.active .arrow{transform:rotate(45deg)}
+.growth-visual{min-height:620px;border-radius:30px;overflow:hidden;position:relative;background:#cfd8d1}
+.growth-visual img{position:absolute;inset:0;transition:opacity .42s ease,transform .7s var(--ease);opacity:0;transform:scale(1.015)}
+.growth-visual img.active{opacity:1;transform:scale(1)}
+.growth-visual-shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(5,14,10,.68))}
+.growth-caption{position:absolute;left:24px;right:24px;bottom:23px;color:#fff;display:flex;align-items:end;justify-content:space-between;gap:25px}
+.growth-caption strong{font-size:30px;letter-spacing:-.035em}.growth-caption span{max-width:430px;font-size:12px;line-height:1.7;color:rgba(255,255,255,.70);text-align:right}
+
+/* majors */
+.majors{background:var(--night);color:#fff}
+.majors .kicker{color:#70d49a}.majors .section-intro{color:rgba(255,255,255,.56)}
+.major-stage{width:var(--page);margin:auto;border-radius:30px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(390px,.65fr);min-height:720px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.12)}
+.major-visual{position:relative;overflow:hidden;background:#0c1913}
+.major-visual img{transition:opacity .28s ease,transform .75s var(--ease)}
+.major-visual img.swap{opacity:.15;transform:scale(1.02)}
+.major-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(4,11,8,.62))}
+.major-visual-caption{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;display:flex;justify-content:space-between;align-items:end}
+.major-visual-caption strong{font-size:13px}.major-visual-caption span{font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.55)}
+.major-panel{padding:38px 32px 26px;border-left:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column}
+.major-meta{font-size:9px;letter-spacing:.16em;color:rgba(255,255,255,.48);margin-bottom:18px}
+.major-panel h3{font-size:44px;line-height:1.02;letter-spacing:-.045em;margin:0 0 18px;font-weight:620}
+.major-summary{font-size:13px;line-height:1.8;color:rgba(255,255,255,.62);margin:0 0 24px}
+.major-facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+.major-fact{padding:16px 8px 16px 0}.major-fact+.major-fact{border-left:1px solid rgba(255,255,255,.10);padding-left:12px}
+.major-fact span{display:block;font-size:9px;color:rgba(255,255,255,.43);margin-bottom:7px}.major-fact strong{font-size:18px}
+.major-courses{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0 18px}.major-courses span{font-size:10px;padding:7px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.64)}
+.major-compare-add{width:100%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.055);height:48px;border-radius:14px;padding:0 13px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.major-compare-add strong{font-size:12px}.major-compare-add span{font-size:9px;color:rgba(255,255,255,.48)}
+.major-compare-add[aria-pressed="true"]{background:rgba(99,205,143,.12);border-color:rgba(115,220,159,.28)}
+.major-selector{margin-top:22px;overflow:auto;flex:1;min-height:0;scrollbar-width:none}.major-selector::-webkit-scrollbar{display:none}
+.major-option{width:100%;border:0;background:none;color:#fff;text-align:left;padding:12px 2px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;justify-content:space-between;align-items:center;cursor:pointer;opacity:.46;transition:opacity .2s,padding .25s var(--ease)}
+.major-option:hover,.major-option.active{opacity:1;padding-left:8px}.major-option span{font-size:13px}.major-option small{font-size:9px;letter-spacing:.12em}
+.major-option.compare-selected small::before{content:"● ";color:#7ad8a5}
+.major-toolbar{width:var(--page);margin:18px auto 0;display:flex;align-items:center;justify-content:space-between;color:rgba(255,255,255,.48);font-size:10px}
+.compare-button{height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.055);color:#fff;padding:0 14px;display:flex;align-items:center;gap:12px;cursor:pointer}.compare-button:disabled{opacity:.35;cursor:not-allowed}.compare-button b{font-size:9px;color:rgba(255,255,255,.55)}
+
+/* campus */
+.campus{background:var(--paper)}
+.campus-rail-wrap{overflow:hidden}
+.campus-rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;padding:0 max(48px,calc((100vw - min(1440px,calc(100vw - 96px)))/2));scrollbar-width:none;cursor:grab}.campus-rail::-webkit-scrollbar{display:none}.campus-rail.dragging{cursor:grabbing;scroll-snap-type:none}
+.campus-card{position:relative;flex:0 0 min(720px,55vw);height:610px;border-radius:29px;overflow:hidden;scroll-snap-align:center;background:#dce4dd;cursor:zoom-in}
+.campus-card.small{flex-basis:min(520px,40vw)}
+.campus-card img{transition:transform .8s var(--ease)}.campus-card:hover img{transform:scale(1.018)}
+.campus-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 54%,rgba(3,12,8,.68))}
+.campus-label{position:absolute;z-index:2;left:22px;right:22px;bottom:20px;color:#fff;display:flex;justify-content:space-between;align-items:end;gap:20px}
+.campus-label strong{font-size:24px;letter-spacing:-.025em}.campus-label span{font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.58)}
+.campus-controls{width:var(--page);margin:16px auto 0;display:flex;align-items:center;justify-content:space-between}.campus-hint{font-size:10px;color:#7d8881}.arrows{display:flex;gap:8px}.arrow-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;transition:.2s}.arrow-btn:hover{background:#fff;transform:translateY(-1px)}
+
+/* news */
+.news{background:#eef1ed}
+.news-layout{width:var(--page);margin:auto;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(420px,.92fr);gap:56px;align-items:start}
+.news-feature{position:relative;min-height:650px;border-radius:30px;overflow:hidden;background:#dce2dd;color:#fff}
+.news-feature::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,5,.04) 20%,rgba(2,8,5,.78) 100%)}
+.news-feature-content{position:absolute;z-index:2;left:28px;right:28px;bottom:27px}
+.news-feature .source{display:inline-flex;padding:7px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.20);background:rgba(255,255,255,.08);font-size:9px;letter-spacing:.13em;margin-bottom:18px;backdrop-filter:blur(6px)}
+.news-feature h3{font-size:38px;line-height:1.08;letter-spacing:-.04em;margin:0 0 13px;max-width:720px}
+.news-feature p{font-size:12px;line-height:1.75;color:rgba(255,255,255,.66);margin:0;max-width:630px}
+.news-feature time{display:block;margin-top:18px;font-size:10px;color:rgba(255,255,255,.50)}
+.news-list{border-top:1px solid var(--line)}
+.news-item{display:grid;grid-template-columns:88px 1fr auto;gap:18px;align-items:start;padding:23px 0;border-bottom:1px solid var(--line)}
+.news-item time{font-size:11px;color:#7e8982;padding-top:5px}.news-item strong{font-size:18px;line-height:1.42;font-weight:610}.news-item span{font-size:9px;letter-spacing:.12em;color:var(--green);padding-top:5px;white-space:nowrap}
+.news-more{display:inline-flex;align-items:center;gap:18px;margin-top:24px;font-size:12px;font-weight:680}
+
+/* admissions */
+.admissions{background:var(--night-2);color:#fff}
+.admissions .kicker{color:#75d49f}.admissions .section-intro{color:rgba(255,255,255,.57)}
+.admission-summary{width:var(--page);margin:auto;border-top:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13);display:grid;grid-template-columns:1.1fr .9fr .9fr}
+.admission-big,.admission-small{padding:34px 24px 34px 0}.admission-small{border-left:1px solid rgba(255,255,255,.12);padding-left:28px}
+.admission-big strong{font-size:86px;line-height:.9;letter-spacing:-.065em;font-weight:600}.admission-big span,.admission-small span{display:block;margin-top:10px;font-size:11px;color:rgba(255,255,255,.52)}.admission-small strong{font-size:42px;letter-spacing:-.045em;font-weight:610}
+.admission-content{width:var(--page);margin:48px auto 0;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr);gap:62px}
+.plan-table{width:100%;border-collapse:collapse;font-size:12px}.plan-table th{text-align:left;color:rgba(255,255,255,.44);font-size:9px;letter-spacing:.10em;font-weight:600;padding:0 0 12px}.plan-table td{padding:13px 0;border-top:1px solid rgba(255,255,255,.10);color:rgba(255,255,255,.76)}.plan-table td:nth-child(n+2),.plan-table th:nth-child(n+2){text-align:right}
+.admission-side h3{font-size:31px;line-height:1.12;letter-spacing:-.035em;margin:0 0 18px}.admission-side>p{font-size:12px;line-height:1.8;color:rgba(255,255,255,.58);margin:0}
+.aid{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}.aid div{padding:17px 8px 17px 0}.aid div+div{border-left:1px solid rgba(255,255,255,.10);padding-left:12px}.aid strong{display:block;font-size:18px}.aid span{display:block;font-size:9px;line-height:1.5;color:rgba(255,255,255,.46);margin-top:5px}
+.contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}.contact-actions a{height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:12px;background:rgba(255,255,255,.045)}.contact-actions a:first-child{background:#fff;color:#0b1711}
+.deadline{margin-top:18px;border-left:1px solid rgba(255,255,255,.18);padding-left:15px;font-size:10px;line-height:1.7;color:rgba(255,255,255,.49)}
+.source-note{width:var(--page);margin:48px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.10);font-size:10px;line-height:1.8;color:rgba(255,255,255,.38)}
+
+/* footer */
+.footer{background:#08100d;color:#fff;padding:52px 0 32px}
+.footer-grid{width:var(--page);margin:auto;display:grid;grid-template-columns:1.35fr .65fr .65fr;gap:42px}
+.footer-brand{display:flex;align-items:center;gap:14px}.footer-brand img{width:58px;height:58px;object-fit:contain}.footer-brand strong{font-size:20px}.footer-brand small{display:block;color:rgba(255,255,255,.43);margin-top:6px;font-size:9px;letter-spacing:.08em}
+.footer-col small{display:block;color:rgba(255,255,255,.37);font-size:9px;letter-spacing:.12em;margin-bottom:13px}.footer-col p,.footer-col a{display:block;margin:0 0 8px;font-size:12px;color:rgba(255,255,255,.67);line-height:1.6}
+.footer-bottom{width:var(--page);margin:38px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.10);display:flex;justify-content:space-between;gap:20px;color:rgba(255,255,255,.33);font-size:9px}
+
+/* overlays */
+.overlay{position:fixed;z-index:1500;inset:0;background:rgba(4,10,7,.64);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:grid;place-items:center;padding:24px;opacity:0;visibility:hidden;transition:.25s}
+.overlay.open{opacity:1;visibility:visible}
+.overlay-card{width:min(1020px,94vw);max-height:88vh;overflow:auto;border-radius:28px;background:rgba(245,247,244,.94);color:var(--ink);border:1px solid rgba(255,255,255,.95);box-shadow:0 35px 100px rgba(0,0,0,.28)}
+.overlay-head{position:sticky;top:0;z-index:2;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;background:rgba(245,247,244,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.overlay-head strong{font-size:17px}.close{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:22px;cursor:pointer}
+.compare-content{padding:22px}.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.compare-item{padding:20px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.62)}.compare-item h4{font-size:23px;margin:0 0 18px}.compare-item dl{margin:0}.compare-item dt{font-size:9px;color:#7b8780;margin-top:13px}.compare-item dd{margin:4px 0 0;font-size:12px;line-height:1.65}
+.lightbox{position:fixed;z-index:1550;inset:0;background:rgba(2,7,5,.87);display:grid;place-items:center;padding:26px;opacity:0;visibility:hidden;transition:.25s}.lightbox.open{opacity:1;visibility:visible}.lightbox figure{margin:0;max-width:min(1220px,92vw);max-height:88vh;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:11px}.lightbox img{max-height:78vh;width:auto;max-width:100%;object-fit:contain;border-radius:22px}.lightbox figcaption{color:rgba(255,255,255,.65);font-size:11px}.lightbox-close{position:absolute;right:24px;top:22px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;font-size:23px;cursor:pointer}
+
+/* mobile quick actions: only after scrolling */
+.mobile-quick{display:none}
+
+@media(max-width:1120px){
+  :root{--page:min(100% - 48px,1100px)}
+  .brand{min-width:240px}.brand-copy small{display:none}
+  .desktop-nav a{padding:13px 9px}
+  .nav-action{display:none}
+  .overview-grid{grid-template-columns:1fr .9fr;gap:38px}.overview-photo{min-height:560px}
+  .section-head{grid-template-columns:150px 1fr}.section-title{grid-template-columns:1fr 300px}
+  .major-stage{grid-template-columns:1.18fr .82fr}
+  .news-layout{grid-template-columns:1fr .86fr;gap:36px}
+}
+@media(max-width:820px){
+  :root{--page:calc(100vw - 28px)}
+  html{scroll-padding-top:80px}
+  .header{padding:10px 0}.header.compact{padding:7px 0}
+  .nav-shell,.header.compact .nav-shell{height:58px;border-radius:17px;padding:0 8px 0 10px}
+  .brand{min-width:0;gap:9px}.brand img{width:40px;height:40px}.brand-copy strong{font-size:13px;max-width:225px;overflow:hidden;text-overflow:ellipsis}.desktop-nav,.nav-action{display:none}.menu-button{display:block;margin-left:auto}
+  .hero{height:100svh;min-height:700px}
+  .hero-media{inset:-2% -20% -2% -26%}.hero-shade{background:linear-gradient(180deg,rgba(3,9,6,.52) 0%,rgba(3,9,6,.28) 28%,rgba(3,9,6,.53) 62%,rgba(3,9,6,.87) 100%),linear-gradient(90deg,rgba(3,9,6,.55),rgba(3,9,6,.08))}
+  .hero-inner{display:block;padding-top:0;position:relative}.hero-copy{position:absolute;left:0;right:0;bottom:155px}
+  .eyebrow{margin-bottom:18px}.hero h1{font-size:clamp(42px,11vw,52px);line-height:.94}.hero h1 span{white-space:normal}.hero-lede{font-size:13px;line-height:1.75;margin:22px 0 24px;max-width:92%}.button{height:46px;padding:0 17px;font-size:12px;border-radius:14px}
+  .hero-status{display:none}.scroll-cue{bottom:22px}
+  .section{padding:86px 0}.section-head{display:block;margin-bottom:34px}.kicker{padding:0;margin-bottom:17px}.section-title{display:block}.section h2{font-size:clamp(43px,12vw,60px);margin-bottom:19px}.section-intro{font-size:13px;line-height:1.75}
+  .overview{border-radius:28px 28px 0 0}
+  .overview-grid{display:block}.overview-photo{min-height:0;height:56svh;border-radius:24px}.overview-copy{padding:30px 0 0}.overview-copy h3{font-size:31px}.overview-copy>p{font-size:13px}.metrics{margin-top:30px}.metric strong{font-size:30px}.metric:nth-child(odd){padding-right:16px}.metric:nth-child(even){padding-left:16px}.overview-note{font-size:10px}
+  .honors-strip{margin-top:52px;display:block}.honor{padding:22px 0}.honor+.honor{border-left:0;border-top:1px solid var(--line);padding-left:0}
+  .growth-layout{display:block}.growth-list{margin-bottom:20px}.growth-tab{padding:18px 3px;grid-template-columns:34px 1fr auto}.growth-tab strong{font-size:20px}.growth-visual{min-height:0;height:58svh;border-radius:24px}.growth-caption{left:18px;right:18px;bottom:18px;display:block}.growth-caption strong{font-size:24px}.growth-caption span{display:block;text-align:left;margin-top:9px;font-size:10px;max-width:90%}
+  .major-stage{display:block;min-height:0;border-radius:24px}.major-visual{height:48svh;min-height:350px}.major-panel{border-left:0;border-top:1px solid rgba(255,255,255,.12);padding:24px 20px 20px}.major-panel h3{font-size:34px}.major-summary{font-size:12px}.major-facts{grid-template-columns:repeat(3,1fr)}.major-selector{display:flex;overflow-x:auto;max-height:none;margin:18px -3px 0;padding-bottom:2px}.major-option{flex:0 0 auto;min-width:166px;width:auto;padding:11px 9px}.major-option span{font-size:12px}.major-option small{margin-left:12px}.major-toolbar{align-items:flex-start}.major-note{max-width:58%;line-height:1.6}
+  .campus-rail{padding-left:14px;padding-right:14px;gap:12px}.campus-card,.campus-card.small{flex-basis:84vw;height:58svh;min-height:420px;border-radius:22px}.campus-label{left:18px;right:18px;bottom:18px;display:block}.campus-label strong{font-size:20px}.campus-label span{display:block;margin-top:6px}.campus-controls{margin-top:12px}.campus-hint{font-size:9px}.arrow-btn{width:42px;height:42px}
+  .news-layout{display:block}.news-feature{min-height:0;height:68svh;border-radius:24px}.news-feature h3{font-size:30px}.news-list{margin-top:34px}.news-item{grid-template-columns:72px 1fr;gap:10px 16px}.news-item span{grid-column:2}.news-more{margin-top:18px}
+  .admission-summary{grid-template-columns:1fr 1fr}.admission-big{grid-column:1/3;padding:26px 0;border-bottom:1px solid rgba(255,255,255,.12)}.admission-big strong{font-size:72px}.admission-small{padding:22px 0}.admission-small:nth-child(3){padding-left:18px}.admission-content{display:block;margin-top:34px}.plan-table{font-size:11px}.admission-side{margin-top:42px}.aid{grid-template-columns:repeat(3,1fr)}.contact-actions{grid-template-columns:1fr}.source-note{margin-top:38px}
+  .footer{padding-bottom:90px}.footer-grid{display:block}.footer-col{margin-top:28px}.footer-bottom{display:block;line-height:1.8}
+  .compare-grid{grid-template-columns:1fr}.overlay{padding:10px}.overlay-card{width:100%;border-radius:23px}.compare-content{padding:14px}
+  .mobile-quick{position:fixed;z-index:900;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translate(-50%,18px);width:calc(100vw - 28px);height:54px;border-radius:17px;display:grid;grid-template-columns:repeat(4,1fr);opacity:0;visibility:hidden;transition:.3s var(--ease);color:#fff;background:rgba(8,17,13,.74);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px) saturate(112%);-webkit-backdrop-filter:blur(10px) saturate(112%);box-shadow:0 14px 35px rgba(0,0,0,.16)}
+  .mobile-quick.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  .mobile-quick a{display:grid;place-items:center;font-size:10px;border-right:1px solid rgba(255,255,255,.08)}.mobile-quick a:last-child{border-right:0}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero-media,.hero-copy,.reveal,.nav-indicator,.growth-visual img,.major-visual img,.campus-card img{transition:none!important;transform:none!important}
+  .scroll-cue i::after{animation:none}
+}
+/* 2026 production refinements */
+.brand img{background:rgba(255,255,255,.94);border-radius:50%;padding:1.5px;box-shadow:0 5px 18px rgba(0,0,0,.14),inset 0 0 0 1px rgba(255,255,255,.55)}
+.header.light .brand img{box-shadow:0 5px 16px rgba(10,40,26,.10),inset 0 0 0 1px rgba(16,80,46,.05)}
+.data-source-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.data-source-links a{font-size:9px;letter-spacing:.08em;padding:8px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:rgba(255,255,255,.56);transition:.2s}.data-source-links a:hover{color:#fff;border-color:rgba(255,255,255,.28)}
+.server-status{display:inline-flex;align-items:center;gap:8px}.server-status::before{content:"";width:6px;height:6px;border-radius:50%;background:#75d49f;box-shadow:0 0 0 5px rgba(117,212,159,.08)}
+@media(max-width:820px){.brand img{width:42px;height:42px}.brand-copy strong{font-size:14px}.brand-copy small{display:none}}
+
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<header class="header" id="header">
+  <div class="nav-shell">
+    <a class="brand" href="#home" aria-label="返回长沙华中涉外职业高中首页">
+      <img loading="lazy" decoding="async" src="./crest.webp" alt="长沙华中涉外职业高中校徽">
+      <span class="brand-copy"><strong>长沙华中涉外职业高中</strong><small>CHANGSHA HUAZHONG FOREIGN-RELATED VOCATIONAL HIGH SCHOOL</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="主要导航">
+      <div class="nav-indicator" aria-hidden="true"></div>
+      <a href="#overview" data-nav="overview">学校概况</a>
+      <a href="#majors" data-nav="majors">专业设置</a>
+      <a href="#campus" data-nav="campus">校园生活</a>
+      <a href="#news" data-nav="news">新闻动态</a>
+      <a href="#admissions" data-nav="admissions">招生服务</a>
+    </nav>
+    <a class="nav-action" href="#majors"><span>查看专业</span><span>↗</span></a>
+    <button class="menu-button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" aria-hidden="true">
+  <nav>
+    <a href="#overview"><b>学校概况</b><small>01</small></a>
+    <a href="#growth"><b>成长路径</b><small>02</small></a>
+    <a href="#majors"><b>专业设置</b><small>03</small></a>
+    <a href="#campus"><b>校园生活</b><small>04</small></a>
+    <a href="#news"><b>新闻动态</b><small>05</small></a>
+    <a href="#admissions"><b>招生服务</b><small>06</small></a>
+  </nav>
+  <div class="mobile-actions"><a href="tel:073188720138">联系学校</a><a href="#majors">查看专业</a></div>
+</div>
+
+<main>
+<section class="hero" id="home" data-tone="dark">
+  <div class="hero-media"><img src="./hero.webp" fetchpriority="high" decoding="async" alt="长沙华中涉外职业高中校园活动场景"></div>
+  <div class="hero-shade"></div><div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">长沙 · 湘江新区</div>
+      <h1><span>让每一种起点，</span><span>都拥有向上的路径。</span></h1>
+      <p class="hero-lede">立足职业教育，重视文化基础、专业技能与综合素养培养，为学生拓展升学发展与技能成长空间。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#overview">了解学校 <span>↘</span></a>
+        <a class="button ghost" href="#majors">查看专业 <span>↘</span></a>
+      </div>
+    </div>
+  </div>
+  <aside class="hero-status" aria-label="学校公开信息摘要">
+    <div class="status-top"><span class="server-status">2026 · 当前公开信息</span><span>CODE 3046</span></div>
+    <h3>在湘江新区，持续生长。</h3>
+    <p>学校创办于 2005 年。2026 年主管部门平台公示 7 个招生专业；办学规模、师资与招生计划均可通过官方渠道核验。</p>
+    <div class="status-grid">
+      <div><strong>2005</strong><span>建校时间</span></div>
+      <div><strong>7</strong><span>2026 招生专业 / 个</span></div>
+    </div>
+  </aside>
+  <div class="scroll-cue"><span>向下浏览</span><i></i></div>
+</section>
+
+<section class="section overview" id="overview" data-tone="light">
+  <div class="section-head reveal">
+    <div class="kicker">01 / SCHOOL</div>
+    <div class="section-title">
+      <h2>立足职业教育，<br>夯实办学基础。</h2>
+      <p class="section-intro">学校创办于 2005 年，位于长沙市湘江新区普瑞西路 139 号。以下数据采用湖南省中等职业教育阳光招生信息平台当前公示信息，便于了解学校办学基础。</p>
+    </div>
+  </div>
+  <div class="overview-grid reveal">
+    <figure class="overview-photo">
+      <img loading="lazy" decoding="async" src="./campus-corridor-2026.webp" alt="长沙华中涉外职业高中2026年招生简章展示的校园教学空间">
+      <figcaption class="photo-cap"><strong>校园教学空间</strong><span>2026 OFFICIAL BROCHURE</span></figcaption>
+    </figure>
+    <div class="overview-copy">
+      <div>
+        <h3>从校园空间到师资配置，<br>用公开数据认识学校。</h3>
+        <p>学校性质为民办职业高中学校，市州招生代码 3046。主管部门公开平台同时披露学校办学规模、师资与教学设备等基础信息。</p>
+        <div class="metrics">
+          <div class="metric"><strong>140.19</strong><span>校园占地 / 亩</span></div>
+          <div class="metric"><strong>60,810</strong><span>校舍建筑面积 / ㎡</span></div>
+          <div class="metric"><strong>2222</strong><span>平台公示在校学生 / 人</span></div>
+          <div class="metric"><strong>158</strong><span>教职工总数 / 人</span></div>
+          <div class="metric"><strong>130</strong><span>专任教师 / 人</span></div>
+          <div class="metric"><strong>805</strong><span>计算机设备 / 台</span></div>
+        </div>
+      </div>
+      <div class="overview-note">主管部门公开平台同时披露：专业教师 65 人，教学仪器设备值 963 万元，“双师型”教师 12 人，具有研究生学历或硕士学位教师 16 人。</div>
+    </div>
+  </div>
+  <div class="honors-strip reveal">
+    <div class="honor"><small>办学评估</small><strong>2021—2025 年均获评“优秀学校”</strong><p>以主管部门公开平台信息为准。</p></div>
+    <div class="honor"><small>教学质量</small><strong>2023、2024 年公共课普测通过率 100%</strong><p>学校公开办学特色信息。</p></div>
+    <div class="honor"><small>学生发展</small><strong>近五年市级相关赛事一等奖 45 个、二等奖 116 个</strong><p>覆盖技能竞赛、文明风采与校园文化艺术节等。</p></div>
+  </div>
+</section>
+
+<section class="section growth" id="growth" data-tone="light">
+  <div class="section-head reveal">
+    <div class="kicker">02 / GROWTH</div>
+    <div class="section-title">
+      <h2>多元成长路径，<br>在选择中持续前行。</h2>
+      <p class="section-intro">学校围绕文化基础、专业技能和综合素养开展教育教学，相关培养内容可在本章节中查看。</p>
+    </div>
+  </div>
+  <div class="growth-layout reveal">
+    <div class="growth-list" role="tablist" aria-label="成长路径">
+      <button class="growth-tab active" role="tab" aria-selected="true" data-growth="0"><span class="num">01</span><strong>升学发展</strong><span class="arrow">↗</span><p>学校公开信息显示，近年来每年均有学生进入本、专科院校继续学习；2023、2024 年公共课普测通过率为 100%。</p></button>
+      <button class="growth-tab" role="tab" aria-selected="false" data-growth="1"><span class="num">02</span><strong>专业技能</strong><span class="arrow">↗</span><p>通过专业课程、实训和技能竞赛积累实践能力，七个招生专业覆盖信息技术、交通运输、装备制造、医药卫生、财经商贸与语言服务等方向。</p></button>
+      <button class="growth-tab" role="tab" aria-selected="false" data-growth="2"><span class="num">03</span><strong>综合素养</strong><span class="arrow">↗</span><p>学校公开办学特色包括“三自教育”“华中思政优课堂”“内务八条线”等育人实践，校园文化、体育与团队活动共同参与学生成长。</p></button>
+    </div>
+    <div class="growth-visual">
+      <img loading="lazy" decoding="async" src="./special-class-2026.webp" alt="长沙华中涉外职业高中2026年招生简章中的升学特色班场景" class="active" data-growth-img="0">
+      <img loading="lazy" decoding="async" src="./path-skill.webp" alt="专业技能实训场景" data-growth-img="1">
+      <img loading="lazy" decoding="async" src="./students-signs-2026.webp" alt="长沙华中涉外职业高中2026年招生简章中的学生校园活动" data-growth-img="2">
+      <div class="growth-visual-shade"></div>
+      <div class="growth-caption"><strong id="growthTitle">升学发展</strong><span id="growthCaption">重视文化基础与学业提升，为继续升学提供学习支持。</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section majors" id="majors" data-tone="dark">
+  <div class="section-head reveal">
+    <div class="kicker">03 / MAJORS</div>
+    <div class="section-title">
+      <h2>七个专业方向，<br>清晰呈现培养重点。</h2>
+      <p class="section-intro">2026 年长沙市本地中职分专业计划共 500 人。专业名称、学制、收费标准与本市计划以主管部门公开平台为准；课程信息参考学校 2026 年官方招生简章。</p>
+    </div>
+  </div>
+  <div class="major-stage reveal">
+    <div class="major-visual">
+      <img id="majorImage" src="./campus-corridor-2026.webp" alt="校园教学环境">
+      <div class="major-visual-caption"><strong id="majorCategory">计算机类</strong><span>校园教学影像</span></div>
+    </div>
+    <div class="major-panel">
+      <div class="major-meta" id="majorMeta">计算机类 · 专业代码 710203 · 本市计划 120 人</div>
+      <h3 id="majorTitle" aria-live="polite">软件与信息服务</h3>
+      <p class="major-summary" id="majorSummary">课程设置包含计算机应用基础、编程 C 语言、计算机网络技术、计算机组装与维护等内容。</p>
+      <div class="major-facts">
+        <div class="major-fact"><span>学制</span><strong>3 年</strong></div>
+        <div class="major-fact"><span>学费 / 年</span><strong id="majorFee">14,500</strong></div>
+        <div class="major-fact"><span>本市计划</span><strong id="majorPlan">120 人</strong></div>
+      </div>
+      <div class="major-courses" id="majorCourses"><span>编程 C 语言</span><span>计算机网络技术</span><span>计算机组装与维护</span></div>
+      <button class="major-compare-add" id="compareAdd" aria-pressed="false"><strong>加入专业对比</strong><span id="compareState">最多选择 3 个</span></button>
+      <div class="major-selector" id="majorSelector" aria-label="专业列表"></div>
+    </div>
+  </div>
+  <div class="major-toolbar"><div class="major-note">学费、本市计划采用主管部门公开平台数据；专业代码与课程内容参考学校 2026 年官方招生简章。</div><button class="compare-button" id="compareBtn" disabled>专业对比 <b id="compareCount">0/3</b><span>↗</span></button></div>
+</section>
+
+<section class="section campus" id="campus" data-tone="light">
+  <div class="section-head reveal">
+    <div class="kicker">04 / CAMPUS LIFE</div>
+    <div class="section-title">
+      <h2>校园生活，<br>记录学习与成长。</h2>
+      <p class="section-intro">教学空间、校园文化艺术节、体育活动、国防教育与学生成长影像，共同呈现学校日常学习与校园文化。</p>
+    </div>
+  </div>
+  <div class="campus-rail-wrap reveal">
+    <div class="campus-rail" id="campusRail">
+      <article class="campus-card" data-title="教学与实训空间 · 2026 招生简章"><img loading="lazy" decoding="async" src="./campus-corridor-2026.webp" alt="校园教学与实训空间"><div class="campus-label"><strong>教学与实训空间</strong><span>2026 OFFICIAL BROCHURE</span></div></article>
+      <article class="campus-card small" data-title="学生成长影像 · 2026 招生简章"><img loading="lazy" decoding="async" src="./students-signs-2026.webp" alt="学生校园成长影像"><div class="campus-label"><strong>学生成长</strong><span>2026 OFFICIAL BROCHURE</span></div></article>
+      <article class="campus-card" data-title="校园文化艺术节"><img loading="lazy" decoding="async" src="./campus-stage.webp" alt="校园文化艺术节舞台"><div class="campus-label"><strong>校园文化艺术节</strong><span>ART & CULTURE</span></div></article>
+      <article class="campus-card small" data-title="体育活动"><img loading="lazy" decoding="async" src="./campus-sports.webp" alt="校园体育活动"><div class="campus-label"><strong>体育活动</strong><span>SPORTS</span></div></article>
+      <article class="campus-card" data-title="国防教育"><img loading="lazy" decoding="async" src="./campus-defense.webp" alt="国防教育活动"><div class="campus-label"><strong>国防教育</strong><span>DISCIPLINE & TEAM</span></div></article>
+      <article class="campus-card small" data-title="团队建设"><img loading="lazy" decoding="async" src="./campus-team.webp" alt="团队建设活动"><div class="campus-label"><strong>团队建设</strong><span>GROW TOGETHER</span></div></article>
+    </div>
+  </div>
+  <div class="campus-controls"><div class="campus-hint">滑动浏览 · 点击图片查看大图</div><div class="arrows"><button class="arrow-btn" id="campusPrev" aria-label="向左浏览">←</button><button class="arrow-btn" id="campusNext" aria-label="向右浏览">→</button></div></div>
+</section>
+
+<section class="section news" id="news" data-tone="light">
+  <div class="section-head reveal">
+    <div class="kicker">05 / NEWS</div>
+    <div class="section-title">
+      <h2>校园动态，<br>持续记录育人成果。</h2>
+      <p class="section-intro">最新公开内容综合学校官网与官方微信公众号整理。首页保留重点动态，更多信息可进入学校现有官网查看。</p>
+    </div>
+  </div>
+  <div class="news-layout reveal">
+    <article class="news-feature">
+      <img loading="lazy" decoding="async" src="./wechat-admission-2026.webp" alt="长沙华中涉外职业高中2026年招生简章官方微信公众号内容">
+      <div class="news-feature-content">
+        <span class="source">官方微信公众号</span>
+        <h3>《长沙华中涉外职业高中 2026 年招生简章》发布</h3>
+        <p>官方微信公众号于 2026 年 7 月 20 日发布年度招生简章，集中介绍学校概况、专业设置、培养方向、资助政策与报名指南。</p>
+        <time datetime="2026-07-20">2026.07.20</time>
+      </div>
+    </article>
+    <div>
+      <div class="news-list">
+        <article class="news-item"><time>06.15</time><strong>第四届校园文化艺术节圆满落幕</strong><span>学校动态</span></article>
+        <article class="news-item"><time>06.15</time><strong>月度组内教研公开课：深耕教研，磨淬以致远</strong><span>教学教研</span></article>
+        <article class="news-item"><time>06.15</time><strong>2026 年学生专业技能普测工作圆满完成</strong><span>技能培养</span></article>
+        <article class="news-item"><time>06.08</time><strong>2026 年高三学子高考壮行活动</strong><span>学生成长</span></article>
+        <article class="news-item"><time>06.04</time><strong>21 天积极心理养成挑战：解锁华中少年的向阳力量</strong><span>心理健康</span></article>
+      </div>
+      <a class="news-more" href="https://www.changshacc.com/news" target="_blank" rel="noopener">进入学校新闻中心 <span>↗</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section admissions" id="admissions" data-tone="dark">
+  <div class="section-head reveal">
+    <div class="kicker">06 / ADMISSIONS & SERVICE</div>
+    <div class="section-title">
+      <h2>2026 招生信息存档，<br>校务服务保持清晰。</h2>
+      <p class="section-intro">2026 年招生计划依据湖南省中等职业教育阳光招生信息平台公开信息。常规报名阶段已进入后续校务安排期，报到、补录及入学事项请以学校最新正式通知为准。</p>
+    </div>
+  </div>
+
+  <div class="admission-summary reveal">
+    <div class="admission-big"><strong>960</strong><span>2026 年学校招生总计划 / 人</span></div>
+    <div class="admission-small"><strong>500</strong><span>长沙市本地计划 / 人</span></div>
+    <div class="admission-small"><strong>460</strong><span>跨市州计划 / 人</span></div>
+  </div>
+
+  <div class="admission-content reveal">
+    <div>
+      <table class="plan-table">
+        <thead><tr><th>专业</th><th>学制</th><th>学费 / 年</th><th>本市计划</th></tr></thead>
+        <tbody>
+          <tr><td>软件与信息服务</td><td>3 年</td><td>14,500 元</td><td>120</td></tr>
+          <tr><td>城市轨道交通运营服务</td><td>3 年</td><td>14,500 元</td><td>90</td></tr>
+          <tr><td>计算机平面设计</td><td>3 年</td><td>14,500 元</td><td>80</td></tr>
+          <tr><td>新能源汽车制造与检测</td><td>3 年</td><td>14,500 元</td><td>70</td></tr>
+          <tr><td>药剂</td><td>3 年</td><td>14,500 元</td><td>65</td></tr>
+          <tr><td>电子商务</td><td>3 年</td><td>14,500 元</td><td>50</td></tr>
+          <tr><td>商务英语</td><td>3 年</td><td>13,500 元</td><td>25</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <aside class="admission-side">
+      <h3>招生代码 3046</h3>
+      <p>阳光招生平台公开招生联系人为李炯，电话 13755196228、0731-88720136。学校官网公开电话为 0731-88720138，地址为长沙市湘江新区普瑞西路 139 号。</p>
+      <div class="aid">
+        <div><strong>2,400</strong><span>国家免学费政策标准 / 元·生·年*</span></div>
+        <div><strong>2,300</strong><span>国家助学金标准 / 元·生·年*</span></div>
+        <div><strong>6,000</strong><span>国家奖学金 / 元·生*</span></div>
+      </div>
+      <div class="contact-actions">
+        <a href="tel:073188720136"><span>招生咨询</span><strong>0731-88720136</strong></a>
+        <a href="tel:073188720138"><span>学校电话</span><strong>0731-88720138</strong></a>
+        <a href="mailto:changshacc@aliyun.com"><span>电子邮箱</span><strong>changshacc@aliyun.com</strong></a>
+        <a href="https://www.changshacc.com/" target="_blank" rel="noopener"><span>现有学校官网</span><strong>访问 ↗</strong></a>
+      </div>
+      <div class="deadline">2026 年官方微信公众号招生简章载明常规报名时间为 3 月 1 日—7 月 15 日。资助、奖学金适用资格及具体执行，以当年国家政策和学校审核结果为准。</div>
+    </aside>
+  </div>
+  <div class="source-note">资料更新：2026 年 8 月 9 日。办学基础数据、招生总计划、本市分专业计划及招生联系方式以湖南省中等职业教育阳光招生信息平台当前公示为准；课程与招生简章素材参考学校官方微信公众号；校园动态来源于学校现有官网。
+    <div class="data-source-links"><a href="https://zsxxtp.hnedu.cn/front/showSchoolInfo?xxid=0834D3953BA51AE5E0537D64A8C0B7C8" target="_blank" rel="noopener">学校信息 · 湖南省教育厅 ↗</a><a href="https://zsxxtp.hnedu.cn/front/showSchoolPlan?xxid=0834D3953BA51AE5E0537D64A8C0B7C8" target="_blank" rel="noopener">2026 招生计划 ↗</a><a href="https://www.changshacc.com/" target="_blank" rel="noopener">学校现有官网 ↗</a></div></div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><img loading="lazy" decoding="async" src="./crest.webp" alt=""><div><strong>长沙华中涉外职业高中</strong><small>CHANGSHA HUAZHONG FOREIGN-RELATED VOCATIONAL HIGH SCHOOL</small></div></div>
+    <div class="footer-col"><small>CONTACT</small><p>长沙市湘江新区普瑞西路 139 号</p><a href="tel:073188720138">0731-88720138</a><a href="mailto:changshacc@aliyun.com">changshacc@aliyun.com</a></div>
+    <div class="footer-col"><small>QUICK LINKS</small><a href="#majors">专业设置</a><a href="#news">新闻动态</a><a href="#admissions">招生服务</a><a href="https://zsxxtp.hnedu.cn/front/showSchoolInfo?xxid=0834D3953BA51AE5E0537D64A8C0B7C8" target="_blank" rel="noopener">阳光招生平台 ↗</a><a href="#home">返回顶部 ↑</a></div>
+  </div>
+  <div class="footer-bottom"><span>长沙华中涉外职业高中</span><span>公开信息请以教育主管部门及学校正式发布为准</span></div>
+</footer>
+
+<div class="mobile-quick" id="mobileQuick" aria-label="移动端快捷入口">
+  <a href="#majors">专业</a><a href="#admissions">招生</a><a href="tel:073188720138">电话</a><a href="#news">动态</a>
+</div>
+
+<div class="overlay" id="compareOverlay" aria-hidden="true">
+  <div class="overlay-card">
+    <div class="overlay-head"><strong>专业信息对比</strong><button class="close" id="compareClose" aria-label="关闭">×</button></div>
+    <div class="compare-content"><div class="compare-grid" id="compareGrid"></div></div>
+  </div>
+</div>
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" aria-label="关闭">×</button>
+  <figure><img alt="校园图片放大预览"><figcaption></figcaption></figure>
+</div>
+
+
+
+<noscript><div style="position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;background:#fff;color:#111;padding:12px 14px;border-radius:12px;font:14px system-ui">部分交互需要浏览器启用 JavaScript；学校公开信息正文仍可直接阅读。</div></noscript>
+<script id="site-js">
+const FALLBACK_DATA = {"majors": [{"title": "软件与信息服务", "cat": "计算机类", "code": "710203", "plan": "120 人", "fee": "14,500", "summary": "课程设置包含计算机应用基础、编程 C 语言、计算机网络技术、计算机组装与维护等内容。", "courses": ["编程 C 语言", "计算机网络技术", "计算机组装与维护"], "image": "./campus-corridor-2026.webp"}, {"title": "计算机平面设计", "cat": "美术类", "code": "710210", "plan": "80 人", "fee": "14,500", "summary": "课程设置包含语文、数学、英语以及色彩、素描、速写等内容，注重美术基础与视觉表达。", "courses": ["色彩", "素描", "速写"], "image": "./honors-2026.webp"}, {"title": "电子商务", "cat": "商贸类", "code": "730701", "plan": "50 人", "fee": "14,500", "summary": "课程设置包含语文、数学、英语以及基础会计、市场营销、推销实务等内容。", "courses": ["基础会计", "市场营销", "推销实务"], "image": "./path-study.webp"}, {"title": "商务英语", "cat": "英语类", "code": "770201", "plan": "25 人", "fee": "13,500", "summary": "课程设置包含商务英语听说、商务英语写作、外贸英语函电、商务英语阅读等内容。", "courses": ["商务英语听说", "商务英语写作", "外贸英语函电"], "image": "./news-speech.webp"}, {"title": "城市轨道交通运营服务", "cat": "旅游类", "code": "700604", "plan": "90 人", "fee": "14,500", "summary": "2026 年招生简章将该专业纳入旅游类课程体系，课程示例包括旅游概论、导游实务以及服务与管理相关内容。", "courses": ["旅游概论", "导游实务", "服务与管理"], "image": "./hero.webp"}, {"title": "新能源汽车制造与检测", "cat": "电子电工类", "code": "660702", "plan": "70 人", "fee": "14,500", "summary": "课程设置包含电工技术基础与技能、电子技术基础与技能、PLC 技术及应用、单片机技术及应用等内容。", "courses": ["电工技术基础与技能", "PLC 技术及应用", "单片机技术及应用"], "image": "./admission.webp"}, {"title": "药剂", "cat": "医卫类", "code": "720301", "plan": "65 人", "fee": "14,500", "summary": "课程设置包含语文、数学、英语以及生理学、人体解剖学、药物学等内容。", "courses": ["生理学", "人体解剖学", "药物学"], "image": "./path-skill.webp"}], "growth": [{"title": "升学发展", "caption": "重视文化基础与学业提升，为继续升学提供学习支持。"}, {"title": "专业技能", "caption": "通过课程、实训与竞赛，把专业知识逐步转化为可操作的实践能力。"}, {"title": "综合素养", "caption": "德育、体育、艺术与团队活动共同参与学生日常成长。"}]};
+let siteData = FALLBACK_DATA;
+let majorData = FALLBACK_DATA.majors;
+let growthData = FALLBACK_DATA.growth;
+(async()=>{
+const header=document.getElementById('header');
+const progress=document.querySelector('.progress span');
+const desktopLinks=[...document.querySelectorAll('.desktop-nav [data-nav]')];
+const indicator=document.querySelector('.nav-indicator');
+const toneSections=[...document.querySelectorAll('[data-tone]')];
+const navSections=['overview','majors','campus','news','admissions'].map(id=>document.getElementById(id));
+let activeId=null, navLock=null, scrollIdleTimer=0, lastScrollY=0;
+
+function moveIndicator(id,instant=false){
+  if(!id){
+    indicator.style.opacity='0';
+    desktopLinks.forEach(x=>x.classList.remove('active'));
+    return;
+  }
+  const a=desktopLinks.find(x=>x.dataset.nav===id);
+  if(!a)return;
+  const pr=a.parentElement.getBoundingClientRect(), r=a.getBoundingClientRect();
+  if(instant)indicator.style.transition='none';
+  indicator.style.opacity='1';
+  indicator.style.width=r.width+'px';
+  indicator.style.transform=`translateX(${r.left-pr.left}px)`;
+  desktopLinks.forEach(x=>x.classList.toggle('active',x===a));
+  if(instant)requestAnimationFrame(()=>indicator.style.transition='');
+}
+function setActive(id,instant=false){if(activeId!==id||instant){activeId=id;moveIndicator(id,instant)}}
+function resolveNav(){
+  const probe=innerHeight*.33;
+  if(navSections[0].getBoundingClientRect().top>probe)return null;
+  let selected=navSections[0];
+  for(const s of navSections){
+    if(s.getBoundingClientRect().top<=probe)selected=s;
+  }
+  // growth remains part of the school-overview reading range until majors begins
+  return selected.id;
+}
+function updateHeaderTone(){
+  const probe=74;
+  let tone='dark';
+  for(const s of toneSections){
+    const r=s.getBoundingClientRect();
+    if(r.top<=probe && r.bottom>probe){tone=s.dataset.tone||'light';break}
+  }
+  header.classList.toggle('light',tone==='light');
+}
+let scrollRAF=0;
+function updateScroll(){
+  scrollRAF=0;
+  const y=scrollY, max=document.documentElement.scrollHeight-innerHeight;
+  progress.style.transform=`scaleX(${max?y/max:0})`;
+  document.documentElement.style.setProperty('--hero-p',Math.max(0,Math.min(1,y/(innerHeight*.9))));
+  header.classList.toggle('compact',y>24);
+  updateHeaderTone();
+  if(!navLock)setActive(resolveNav());
+  const quick=document.getElementById('mobileQuick');
+  if(innerWidth<=820){
+    const nearBottom=y+innerHeight>document.documentElement.scrollHeight-180;
+    const scrollingUp=y<lastScrollY-5;
+    quick.classList.toggle('show',y>innerHeight*.82 && (scrollingUp||nearBottom));
+  }else quick.classList.remove('show');
+  lastScrollY=y;
+}
+function onScroll(){
+  if(!scrollRAF)scrollRAF=requestAnimationFrame(updateScroll);
+  clearTimeout(scrollIdleTimer);
+  scrollIdleTimer=setTimeout(()=>{if(navLock){navLock=null;setActive(resolveNav())}},150);
+}
+addEventListener('scroll',onScroll,{passive:true});
+addEventListener('resize',()=>{moveIndicator(activeId,true);updateScroll()});
+
+function smoothGo(id){
+  const t=document.getElementById(id);if(!t)return;
+  if(desktopLinks.some(a=>a.dataset.nav===id)){navLock=id;setActive(id)}
+  t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+}
+desktopLinks.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();smoothGo(a.dataset.nav)}));
+document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();navLock=null;document.getElementById('home').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  if(a.classList.contains('brand')||a.closest('.desktop-nav'))return;
+  a.addEventListener('click',e=>{const id=a.getAttribute('href').slice(1);if(!id)return;e.preventDefault();smoothGo(id)})
+});
+
+const hero=document.querySelector('.hero');
+hero.addEventListener('pointermove',e=>{
+  if(e.pointerType==='touch')return;
+  const r=hero.getBoundingClientRect();
+  const x=Math.max(14,Math.min(92,(e.clientX-r.left)/r.width*100));
+  const y=Math.max(8,Math.min(80,(e.clientY-r.top)/r.height*100));
+  document.documentElement.style.setProperty('--mouse-x',x+'%');
+  document.documentElement.style.setProperty('--mouse-y',y+'%');
+});
+
+/* mobile menu */
+const menuBtn=document.querySelector('.menu-button'),menu=document.querySelector('.mobile-menu');
+function toggleMenu(open){
+  menuBtn.setAttribute('aria-expanded',String(open));
+  menu.classList.toggle('open',open);menu.setAttribute('aria-hidden',String(!open));
+  document.body.style.overflow=open?'hidden':'';
+}
+menuBtn.addEventListener('click',()=>toggleMenu(menuBtn.getAttribute('aria-expanded')!=='true'));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
+
+/* growth: user-controlled only */
+const growthTabs=[...document.querySelectorAll('.growth-tab')];
+const growthImgs=[...document.querySelectorAll('[data-growth-img]')];
+function selectGrowth(i){
+  growthTabs.forEach((b,j)=>{b.classList.toggle('active',j===i);b.setAttribute('aria-selected',String(j===i))});
+  growthImgs.forEach((img,j)=>img.classList.toggle('active',j===i));
+  document.getElementById('growthTitle').textContent=growthData[i].title;
+  document.getElementById('growthCaption').textContent=growthData[i].caption;
+}
+growthTabs.forEach(b=>b.addEventListener('click',()=>selectGrowth(+b.dataset.growth)));
+
+/* majors */
+const selector=document.getElementById('majorSelector'),mImg=document.getElementById('majorImage'),
+mTitle=document.getElementById('majorTitle'),mMeta=document.getElementById('majorMeta'),
+mSummary=document.getElementById('majorSummary'),mFee=document.getElementById('majorFee'),
+mPlan=document.getElementById('majorPlan'),mCourses=document.getElementById('majorCourses'),mCat=document.getElementById('majorCategory');
+majorData.forEach((m,i)=>{
+  const b=document.createElement('button');b.className='major-option'+(i===0?' active':'');b.dataset.index=i;
+  b.innerHTML=`<span>${m.title}</span><small>${String(i+1).padStart(2,'0')}</small>`;
+  b.addEventListener('click',()=>selectMajor(i));selector.appendChild(b)
+});
+let currentMajor=0;const compareSelected=new Set();
+const compareAdd=document.getElementById('compareAdd'),compareBtn=document.getElementById('compareBtn'),
+compareCount=document.getElementById('compareCount'),compareState=document.getElementById('compareState');
+function refreshCompareUI(){
+  compareCount.textContent=`${compareSelected.size}/3`;
+  compareBtn.disabled=compareSelected.size<2;
+  compareAdd.setAttribute('aria-pressed',String(compareSelected.has(currentMajor)));
+  compareAdd.querySelector('strong').textContent=compareSelected.has(currentMajor)?'已加入对比':'加入专业对比';
+  compareState.textContent=compareSelected.has(currentMajor)?'再次点击可移除':(compareSelected.size>=3?'已选择 3 个':'最多选择 3 个');
+  [...selector.children].forEach((b,j)=>b.classList.toggle('compare-selected',compareSelected.has(j)));
+}
+function selectMajor(i){
+  currentMajor=i;const m=majorData[i];
+  mImg.classList.add('swap');
+  setTimeout(()=>{mImg.src=m.image;mImg.alt='长沙华中涉外职业高中校园教学影像';mImg.classList.remove('swap')},160);
+  mTitle.textContent=m.title;mCat.textContent=m.cat;mMeta.textContent=`${m.cat} · 专业代码 ${m.code} · 本市计划 ${m.plan}`;
+  mSummary.textContent=m.summary;mFee.textContent=m.fee;mPlan.textContent=m.plan;
+  mCourses.innerHTML=m.courses.map(x=>`<span>${x}</span>`).join('');
+  [...selector.children].forEach((b,j)=>b.classList.toggle('active',j===i));
+  refreshCompareUI();
+}
+compareAdd.addEventListener('click',()=>{
+  if(compareSelected.has(currentMajor))compareSelected.delete(currentMajor);
+  else if(compareSelected.size<3)compareSelected.add(currentMajor);
+  refreshCompareUI()
+});
+refreshCompareUI();
+
+const compareOverlay=document.getElementById('compareOverlay'),compareGrid=document.getElementById('compareGrid');
+compareBtn.addEventListener('click',()=>{
+  if(compareSelected.size<2)return;
+  compareGrid.innerHTML=[...compareSelected].map(i=>majorData[i]).map(m=>`
+  <article class="compare-item"><h4>${m.title}</h4><dl>
+    <dt>专业代码</dt><dd>${m.code}</dd>
+    <dt>学费</dt><dd>${m.fee} 元/年</dd>
+    <dt>2026 长沙市本地计划</dt><dd>${m.plan}</dd>
+    <dt>课程示例</dt><dd>${m.courses.join('、')}</dd>
+    <dt>学习重点</dt><dd>${m.summary}</dd>
+  </dl></article>`).join('');
+  compareOverlay.classList.add('open');compareOverlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'
+});
+function closeCompare(){compareOverlay.classList.remove('open');compareOverlay.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+document.getElementById('compareClose').addEventListener('click',closeCompare);
+compareOverlay.addEventListener('click',e=>{if(e.target===compareOverlay)closeCompare()});
+
+/* campus manual rail */
+const rail=document.getElementById('campusRail');
+document.getElementById('campusPrev').onclick=()=>rail.scrollBy({left:-Math.min(650,innerWidth*.75),behavior:'smooth'});
+document.getElementById('campusNext').onclick=()=>rail.scrollBy({left:Math.min(650,innerWidth*.75),behavior:'smooth'});
+let railDrag=false,railMoved=false,dragX=0,dragLeft=0,railSuppressClickUntil=0;
+rail.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||e.button!==0)return;railDrag=true;railMoved=false;dragX=e.clientX;dragLeft=rail.scrollLeft;rail.classList.add('dragging')});
+rail.addEventListener('pointermove',e=>{if(!railDrag||!(e.buttons&1))return;const dx=e.clientX-dragX;if(Math.abs(dx)>14)railMoved=true;if(railMoved)rail.scrollLeft=dragLeft-dx});
+['pointerup','pointercancel','pointerleave'].forEach(type=>rail.addEventListener(type,()=>{if(railMoved)railSuppressClickUntil=Date.now()+260;railDrag=false;railMoved=false;rail.classList.remove('dragging')}));
+
+const lightbox=document.getElementById('lightbox'),lbImg=lightbox.querySelector('img'),lbCap=lightbox.querySelector('figcaption');
+document.querySelectorAll('.campus-card').forEach(card=>card.addEventListener('click',()=>{
+  
+  const img=card.querySelector('img');lbImg.src=img.src;lbCap.textContent=card.dataset.title;
+  lightbox.classList.add('open');lightbox.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'
+}));
+function closeLightbox(){lightbox.classList.remove('open');lightbox.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+lightbox.querySelector('.lightbox-close').onclick=closeLightbox;
+lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCompare();closeLightbox();toggleMenu(false)}});
+
+/* meaningful reveal only */
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(e.isIntersecting)e.target.classList.add('in');
+  else if(e.boundingClientRect.top>innerHeight*.92)e.target.classList.remove('in')
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+requestAnimationFrame(()=>{setActive(null,true);updateScroll()});
+})();
+
+</script>
+</body>
+</html>
